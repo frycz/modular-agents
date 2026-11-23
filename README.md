@@ -12,6 +12,8 @@ The interfaces are not tied to a language, a model provider or a runtime. This r
 
 Status: alpha. The interfaces may still change.
 
+Documentation: https://frycz.github.io/modular-agents/
+
 ## The building blocks
 
 Each building block is a small interface, most of them with one to three methods. The interfaces below are abridged: lifecycle methods (`start()` and `aclose()`) and some optional parts are left out. The full definitions are in [`src/modular_agents/interfaces/`](src/modular_agents/interfaces).
@@ -303,7 +305,7 @@ print(writer_agent.tree())
 
 
 async def main():
-    session = TreeBudget(limit={"cost_usd": 1.0})  # every model call in the whole tree is charged here
+    session = TreeBudget(limit={"tokens": 200_000})  # every model call in the whole tree is charged here
     async with writer_agent.agent(session_budget=session) as agent:
         outcome = await agent.run("Write a one-line summary of how the budget works.")
     print(message_text(outcome.final))
@@ -442,6 +444,13 @@ uv run --env-file .env python -m examples.demo "<task>" [effort]
 ```sh
 uv sync
 uv run pytest
+```
+
+The documentation is built with MkDocs. Every code example in it is a file in `docs/examples/`, run by `tests/test_docs_examples.py`. To preview the site locally:
+
+```sh
+uv sync --group docs
+uv run mkdocs serve
 ```
 
 ## License

@@ -1,0 +1,97 @@
+site_name: modular-agents
+site_description: A modular architecture for LLM agents, with a reference implementation in Python.
+site_url: https://frycz.github.io/modular-agents/
+repo_url: https://github.com/frycz/modular-agents
+repo_name: frycz/modular-agents
+edit_uri: edit/main/docs/
+copyright: MIT License
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.footer
+    - navigation.top
+    - navigation.indexes
+    - content.code.copy
+    - toc.follow
+    - search.suggest
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets:
+      base_path: ["."]
+      check_paths: true
+      dedent_subsections: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_source: false
+            show_root_heading: true
+            show_root_full_path: false
+            members_order: source
+            show_signature_annotations: true
+            separate_signature: true
+            filters: ["!^_"]
+            heading_level: 3
+
+nav:
+  - Home: index.md
+  - Getting started: getting-started.md
+  - Concepts:
+      - Overview: concepts/index.md
+      - Messages: concepts/messages.md
+      - Model: concepts/model.md
+      - Tools: concepts/tools.md
+      - State and run store: concepts/state.md
+      - Context policy: concepts/context-policy.md
+      - Loop: concepts/loop.md
+      - Budget: concepts/budget.md
+      - Events: concepts/events.md
+      - Harness: concepts/harness.md
+      - Agent: concepts/agent.md
+      - Composition: concepts/composition.md
+  - Tutorials:
+      - A research team: tutorials/research-team.md
+      - A home assistant: tutorials/home-assistant.md
+  - Examples: examples.md
+  - API reference:
+      - Interfaces: reference/interfaces.md
+      - Building blocks: reference/building-blocks.md
+
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn
