@@ -1,12 +1,14 @@
 name: Docs
 
-# Builds the documentation site on every pull request, and deploys it to GitHub Pages on every push to main.
+# Builds the documentation site on every pull request, and deploys it to GitHub Pages on every push to main
+# and on every manual run (gh workflow run docs.yml).
 # In the repository settings, Pages must use "GitHub Actions" as its source.
 
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -26,7 +28,7 @@ jobs:
           path: site/
 
   deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     needs: build
     runs-on: ubuntu-latest
     permissions:
