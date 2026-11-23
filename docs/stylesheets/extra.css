@@ -1,0 +1,4 @@
+/* Center mermaid diagrams. */
+.md-typeset .mermaid {
+  text-align: center;
+}
